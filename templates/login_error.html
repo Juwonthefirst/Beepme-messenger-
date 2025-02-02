@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login to your account</title>
+</head>
+<body bgcolor="lightgrey">
+    <h2>Input your login details</h2>
+    <form action="/home/" method="POST">
+    	<label for="user"><strong>Username: </strong></label>
+    	<br>
+    	<input type="text" name="username" value="{{ user }}" placeholder="Input your username here......" id="user" required>
+    	<br><br>
+    	<label for="pass"><strong>Password: </strong></label>
+    	<br>
+    	<input type="password" name="password" placeholder="Input your password here......" id="pass" required>
+   	<br>
+    	<p><strong> {{ error }} </strong></p>
+    	<br>
+    	<a href="/signup/">Don't have an account? Signup here</a>
+    	<br><br>
+    	<input type="submit" value="Login">
+    </form>
+</body>
+</html>
