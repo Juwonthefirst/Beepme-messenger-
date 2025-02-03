@@ -13,14 +13,14 @@
     	<br><br>
     	<label for="email"><strong>Email Address: </strong></label>
     	<br>
-    	<input type="text" name="email" value="{{ email }}" placeholder="Input your Email address here......" id="user" required>
+    	<input type="text" name="email" value="{{ email }}" placeholder="Input your Email address here......" id="email_id" required>
     	<br><br>
     	<label for="pass"><strong>Password: </strong></label>
     	<br>
     	<input type="password" name="password" placeholder="Input your password here......" id="pass" required>
-    	<br>
-    	<p><strong> {{ error }} </strong></p>
-    	<br>
+    	{% for error in errors %}
+    		<p><strong>{{ error }}</strong></p>
+		{% endfor %}
     	<br>
     	<input type="submit" value="Signup">
 </body>
