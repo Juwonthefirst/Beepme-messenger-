@@ -18,30 +18,33 @@ def signup_page():
 
 		
 @app.route("/welcome/", methods=["POST"])
-def create_user():	
+def create_user():
+	error_dict={"username_unavail":"Username already in use", "email_not_free":"E-mail already in use","invalid_email":"Invalid E-mail", "pass_not_okay":"Password needs to be 8 characters long and only have alphabet and numbers"}
 	try:
 		username=(request.form.get("username")).strip(). capitalize()
 		email=(request.form.get("email")).strip().lower()
-		password=(request.form.get("password")).strip()
-		
+		password=(request.form.get("password")).strip()		
 		user_db=shelve.open(db_location)
-		username_avail=not username in user_db.keys()
-		email_free=email not in user_db["email_list"]
-		valid_email="@gmail.com" in email
-		pass_okay=(len(password) >=  8) and (password.isalnum())
-		if username_avail and email_free and valid_email and pass_okay:
+		
+		username_avail=(not username in user_db.keys(),"username_unavail")
+		email_free=(email not in user_db["email_list"],"email_not_free")
+		valid_email=("@gmail.com" in email,"invalid_email")
+		pass_okay=((len(password) >=  8) and (password.isalnum()),"pass_not_okay")
+		
+		if username_avail[0] and email_free[0] and valid_email[0] and pass_okay[0]:
 			hashed_password = ph.hash(password)
 			user_db.update({username:{"email": email,"pass":hashed_password, "friends":[],"settings":{}}})
 			list=user_db["email_list"]
 			list.append(email)
 			user_db["email_list"]=list
-			return render_template ("home.html", user=username)				
+			return render_template ("home.html", user=username)		
+					
 		else:
-			error = "working"
-			return render_template("signup_error.html", error=error, user=username, email=email)
+			error = [error_dict.get(no_error[1]) for no_error in [username_avail,email_free,valid_email,pass_okay] if not no_error[0]]
+			return render_template("signup_error.html", errors=error, user=username, email=email)
 	except:
-		error = "working"
-		return render_template("signup_error.html", error=error, user=username, email=email)
+		error="Unknown error, Please try again later"
+		return render_template("signup_error.html", errors=error, user=username, email=email)
 	user_db.close()
 
 @app.route("/home/", methods=["POST"])
