@@ -18,8 +18,8 @@
     	<label for="pass"><strong>Password: </strong></label>
     	<br>
     	<input type="password" name="password" placeholder="Input your password here......" id="pass" required>
-    	{% for error in errors %}
-    		<p><strong>{{ error }}</strong></p>
+		{% for error in errors %}
+			<p><strong>{{ error }}</strong></p>
 		{% endfor %}
     	<br>
     	<input type="submit" value="Signup">
