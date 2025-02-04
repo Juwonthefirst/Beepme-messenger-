@@ -66,5 +66,3 @@ def login_user():
 	except:
 		error="An Error occurred, Please try again later"
 		return render_template("login_error.html",error=error, user=username)
-		
-app.run(debug=True, host="0.0.0.0", port=5000)
