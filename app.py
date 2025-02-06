@@ -47,7 +47,8 @@ def create_user():
 	except:
 		error=["Unknown error, Please try again later"]
 		return render_template("signup_error.html", errors=error, user=username, email=email)
-	user_db.close()
+	finally:
+		user_db.close()
 
 @app.route("/home/", methods=["POST"])
 def login_user():
@@ -68,4 +69,5 @@ def login_user():
 	except:
 		error="An Error occurred, Please try again later"
 		return render_template("login_error.html",error=error, user=username)
+		
 app.run(debug= True,host="0.0.0.0", port=5000)
