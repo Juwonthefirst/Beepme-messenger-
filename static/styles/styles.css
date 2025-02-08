@@ -1,0 +1,28 @@
+
+h2{
+	padding:10px;
+	background-color: black;
+	color:white
+}
+body {
+	padding:1px;
+  font-family: sans-serif;
+  background-color: lightgrey
+}
+
+span {
+  background-color: black;
+  color:white
+}
+
+strong.error {
+  color: red;
+}
+
+em {
+  color: rebeccapurple;
+}
+
+label {
+	color:black
+}
