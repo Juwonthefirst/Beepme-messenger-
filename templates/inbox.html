@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Check your inbox</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+	<form action="/home/inbox/messages" method="GET">
+		<input name="user" value="{{ user }}" hidden>
+		<label for="friend">Which friend's inbox do you want to check</label>
+		<input name="friend" id="friend" list="friend_list">
+		<datalist id="friend_list">
+			{% for friend in friends %}
+				<option value = "{{ friend }}"></option>
+			{% endfor %}
+		</datalist>
+		<input type="submit" value="check inbox">
+	</form>
+	
+		{% for message in messages %}
+			<br>
+			<p>{{ message }}</p>
+		{% endfor %}
+	</body>
+</html>

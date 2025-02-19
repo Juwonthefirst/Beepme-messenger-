@@ -1,1 +1,30 @@
-<h2> Welcome {{ user }} </h2>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Text them</title>
+</head>
+<body>
+	<h2> Welcome {{ user }} </h2>
+	<a href ="/home/inbox/" > Check your messages</a>
+	<form action="/home/message" method="POST">
+		<input name="user" value= "{{ user }}" hidden>
+		<br><br>
+		<label for="friend"> Who are we texting</label>
+		<br>
+		<input name= "friend" id="friend" list="friend_list" required>
+			<datalist id="friend_list">{
+			{% for friend in friends %}
+				<option value = "{{ friend }}"></option>
+			{% endfor %}
+			</datalist>
+		<br><br>
+		<label for="message">What do you want to tell them</label>
+		<br>
+		<textarea name="message" id="message" placeholder="What do you want to say........" required></textarea>
+		<br><br>
+		<input type="submit" value="Send">
+	</form>
+	<p> {{ status }} </p>
+</body>
+</html>
